@@ -6,8 +6,22 @@ using NUnitForTesters.Services;
 
 namespace NUnitForTesters.Test.Services
 {
-    [TestFixture]
-    public class WeirdServiceTests
+    internal class WeirdServiceTests
     {
+        private WeirdService _ime;
+
+        [SetUp]
+        public void Setup()
+        {
+            _ime = new WeirdService();
+        }
+
+        [Test, Retry(4)]
+        public void TestBB()
+        {
+            int result = _ime.ThisMethodWillPassSometimes();
+            Assert.That(result, Is.LessThanOrEqualTo(1000));
+
+        }
     }
 }
